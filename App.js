@@ -8,10 +8,16 @@ import FirstPage from './pages/FirstPage';
 import SecondPage from './pages/SecondPage';
 import ThirdPage from './pages/ThirdPage';
 import SignupPage  from './pages/SignupPage';
+import Apipage from './pages/Apipage';
 // Import Custom Sidebar
 import CustomSidebarMenu from './CustomSidebarMenu';
 import LoginPage from './pages/LoginPage';
 import DrawerNavigatorRoutes from './Navigator/DrawerNavigatorRoutes';
+import ApiPage from './pages/Apipage';
+import ButtonPage from './pages/ButtonPage';
+import ApiPageTwo from './pages/ApiPageTwo';
+import ApiPageThree from './pages/ApiPageThree';
+
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -186,6 +192,131 @@ function loginScreenStack({ navigation }) {
   );
 }
 
+
+function apiScreenStack({ navigation }) {
+  return (
+    <Stack.Navigator
+      initialRouteName="ApiPage"
+      screenOptions={{
+        headerShown:false,
+        headerLeft: () => (
+          <NavigationDrawerStructure navigationProps={navigation} />
+        ),
+        headerStyle: {
+          backgroundColor: '#f4511e', //Set Header color
+        },
+        headerTintColor: '#fff', //Set Header text color
+        headerTitleStyle: {
+          fontWeight: 'bold', //Set Header text style
+        },
+      }}>
+      <Stack.Screen
+        name="ApiPage"
+        component={ApiPage}
+        options={{
+
+          title: 'Api Page', //Set Header Title
+        }}
+      />
+
+    </Stack.Navigator>
+  );
+}
+
+
+function apitwoScreenStack({ navigation }) {
+  return (
+    <Stack.Navigator
+      initialRouteName="ApiPageTwo"
+      screenOptions={{
+        headerShown:false,
+        headerLeft: () => (
+          <NavigationDrawerStructure navigationProps={navigation} />
+        ),
+        headerStyle: {
+          backgroundColor: '#f4511e', //Set Header color
+        },
+        headerTintColor: '#fff', //Set Header text color
+        headerTitleStyle: {
+          fontWeight: 'bold', //Set Header text style
+        },
+      }}>
+      <Stack.Screen
+        name="ApiPageTwo"
+        component={ApiPageTwo}
+        options={{
+
+          title: 'Api Page 2', //Set Header Title
+        }}
+      />
+
+    </Stack.Navigator>
+  );
+}
+
+
+function apthreeScreenStack({ navigation }) {
+  return (
+    <Stack.Navigator
+      initialRouteName="ApiPageTwo"
+      screenOptions={{
+        headerShown:false,
+        headerLeft: () => (
+          <NavigationDrawerStructure navigationProps={navigation} />
+        ),
+        headerStyle: {
+          backgroundColor: '#f4511e', //Set Header color
+        },
+        headerTintColor: '#fff', //Set Header text color
+        headerTitleStyle: {
+          fontWeight: 'bold', //Set Header text style
+        },
+      }}>
+      <Stack.Screen
+        name="ApiPageThree"
+        component={ApiPageThree}
+        options={{
+
+          title: 'Api Page 3', //Set Header Title
+        }}
+      />
+
+    </Stack.Navigator>
+  );
+}
+
+
+
+
+function buttonScreenStack({ navigation }) {
+  return (
+    <Stack.Navigator
+      initialRouteName="ButtonPage"
+      screenOptions={{
+        headerShown:false,
+        headerLeft: () => (
+          <NavigationDrawerStructure navigationProps={navigation} />
+        ),
+        headerStyle: {
+          backgroundColor: '#f4511e', //Set Header color
+        },
+        headerTintColor: '#fff', //Set Header text color
+        headerTitleStyle: {
+          fontWeight: 'bold', //Set Header text style
+        },
+      }}>
+      <Stack.Screen
+        name="ButtonPage"
+        component={ButtonPage}
+        options={{
+          title: 'Button Page', //Set Header Title
+        }}
+      />
+
+    </Stack.Navigator>
+  );
+}
+
 function App() {
   return (
     <NavigationContainer>
@@ -212,7 +343,7 @@ function App() {
         />
         <Drawer.Screen
           name="SignupPage"
-          options={{ drawerLabel: 'Signup Page' }}
+          options={{ drawerLabel: 'Signup Page'}}
           component={signupScreenStack}
         />
         <Drawer.Screen
@@ -220,6 +351,27 @@ function App() {
           options={{ drawerLabel: 'Log In Page' }}
           component={loginScreenStack}
         />
+        <Drawer.Screen
+          name="ApiPage"
+          options={{ drawerLabel: 'Api Page'}}
+          component={apiScreenStack}
+        />
+        <Drawer.Screen
+          name="ApiPage2"
+          options={{ drawerLabel: 'Api Page 2'}}
+          component={apitwoScreenStack}
+        />
+        <Drawer.Screen
+          name="ApiPage3"
+          options={{ drawerLabel: 'Api Page 3'}}
+          component={apthreeScreenStack}
+        />
+         <Drawer.Screen
+          name="ButtonPage"
+          options={{ drawerLabel: 'Button Page' }}
+          component={buttonScreenStack}
+        />
+
       </Drawer.Navigator>
 
     </NavigationContainer>
