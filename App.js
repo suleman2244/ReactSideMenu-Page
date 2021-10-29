@@ -7,16 +7,15 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import FirstPage from './pages/FirstPage';
 import SecondPage from './pages/SecondPage';
 import ThirdPage from './pages/ThirdPage';
-import SignupPage  from './pages/SignupPage';
-import Apipage from './pages/Apipage';
+import SignupPage from './pages/SignupPage';
 // Import Custom Sidebar
 import CustomSidebarMenu from './CustomSidebarMenu';
 import LoginPage from './pages/LoginPage';
 import DrawerNavigatorRoutes from './Navigator/DrawerNavigatorRoutes';
-import ApiPage from './pages/Apipage';
-import ButtonPage from './pages/ButtonPage';
+import ApiPage from './pages/ApiPage';
 import ApiPageTwo from './pages/ApiPageTwo';
 import ApiPageThree from './pages/ApiPageThree';
+// import CounterUsingRedux from './src/CounterUsingRedux';
 
 
 const Stack = createStackNavigator();
@@ -32,7 +31,7 @@ const NavigationDrawerStructure = (props) => {
   };
 
   return (
-    <View style={{ flexDirection: 'row',alignItems:'center' }}>
+    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
       <TouchableOpacity onPress={toggleDrawer}>
 
       </TouchableOpacity>
@@ -48,8 +47,8 @@ function firstScreenStack({ navigation }) {
 
         name="HomePage"
         component={FirstPage}
-        options = {{
-           headerShown:false,
+        options={{
+          headerShown: false,
 
           title: 'Home Page', //Set Header Title
           headerLeft: () => (
@@ -62,8 +61,8 @@ function firstScreenStack({ navigation }) {
 
           headerTitleStyle: {
             fontWeight: 'bold',
-            justifyContent:'center',
-             //Set Header text style
+            justifyContent: 'center',
+            //Set Header text style
           },
 
         }}
@@ -77,7 +76,7 @@ function secondScreenStack({ navigation }) {
     <Stack.Navigator
       initialRouteName="AboutPage"
       screenOptions={{
-        headerShown:false,
+        headerShown: false,
         headerLeft: () => (
           <NavigationDrawerStructure navigationProps={navigation} />
         ),
@@ -107,7 +106,7 @@ function thirdScreenStack({ navigation }) {
     <Stack.Navigator
       initialRouteName="ContactPage"
       screenOptions={{
-        headerShown:false,
+        headerShown: false,
         headerLeft: () => (
           <NavigationDrawerStructure navigationProps={navigation} />
         ),
@@ -137,7 +136,7 @@ function signupScreenStack({ navigation }) {
     <Stack.Navigator
       initialRouteName="SignupPage"
       screenOptions={{
-        headerShown:false,
+        headerShown: false,
         headerLeft: () => (
           <NavigationDrawerStructure navigationProps={navigation} />
         ),
@@ -168,7 +167,7 @@ function loginScreenStack({ navigation }) {
     <Stack.Navigator
       initialRouteName="LoginPage"
       screenOptions={{
-        headerShown:false,
+        headerShown: false,
         headerLeft: () => (
           <NavigationDrawerStructure navigationProps={navigation} />
         ),
@@ -198,7 +197,7 @@ function apiScreenStack({ navigation }) {
     <Stack.Navigator
       initialRouteName="ApiPage"
       screenOptions={{
-        headerShown:false,
+        headerShown: false,
         headerLeft: () => (
           <NavigationDrawerStructure navigationProps={navigation} />
         ),
@@ -229,7 +228,7 @@ function apitwoScreenStack({ navigation }) {
     <Stack.Navigator
       initialRouteName="ApiPageTwo"
       screenOptions={{
-        headerShown:false,
+        headerShown: false,
         headerLeft: () => (
           <NavigationDrawerStructure navigationProps={navigation} />
         ),
@@ -260,7 +259,7 @@ function apthreeScreenStack({ navigation }) {
     <Stack.Navigator
       initialRouteName="ApiPageTwo"
       screenOptions={{
-        headerShown:false,
+        headerShown: false,
         headerLeft: () => (
           <NavigationDrawerStructure navigationProps={navigation} />
         ),
@@ -287,37 +286,46 @@ function apthreeScreenStack({ navigation }) {
 
 
 
+// const App_two = () => <CounterUsingRedux />;
+// export default App_two
 
-function buttonScreenStack({ navigation }) {
-  return (
-    <Stack.Navigator
-      initialRouteName="ButtonPage"
-      screenOptions={{
-        headerShown:false,
-        headerLeft: () => (
-          <NavigationDrawerStructure navigationProps={navigation} />
-        ),
-        headerStyle: {
-          backgroundColor: '#f4511e', //Set Header color
-        },
-        headerTintColor: '#fff', //Set Header text color
-        headerTitleStyle: {
-          fontWeight: 'bold', //Set Header text style
-        },
-      }}>
-      <Stack.Screen
-        name="ButtonPage"
-        component={ButtonPage}
-        options={{
-          title: 'Button Page', //Set Header Title
-        }}
-      />
+// function counterScreenStack({ navigation }) {
+//   return (
+//     <Stack.Navigator
+//       initialRouteName="CounterUsingRedux"
+//       screenOptions={{
+//         headerShown:false,
+//         headerLeft: () => (
+//           <NavigationDrawerStructure navigationProps={navigation} />
+//         ),
+//         headerStyle: {
+//           backgroundColor: '#f4511e', //Set Header color
+//         },
+//         headerTintColor: '#fff', //Set Header text color
+//         headerTitleStyle: {
+//           fontWeight: 'bold', //Set Header text style
+//         },
+//       }}>
+//       <Stack.Screen
+//         name="CounterUsingRedux"
+//         component={CounterUsingRedux}
+//         options={{
 
-    </Stack.Navigator>
-  );
-}
+//           title: 'CounterUsingRedux', //Set Header Title
+//         }}
+//       />
+
+//     </Stack.Navigator>
+//   );
+// }
+
+
+
+
+
 
 function App() {
+
   return (
     <NavigationContainer>
       <Drawer.Navigator
@@ -328,7 +336,7 @@ function App() {
         drawerContent={(props) => <CustomSidebarMenu {...props} />}>
         <Drawer.Screen
           name="HomePage"
-          options={{   drawerLabel: 'Home Page'  }}
+          options={{ drawerLabel: 'Home Page' }}
           component={firstScreenStack}
         />
         <Drawer.Screen
@@ -343,7 +351,7 @@ function App() {
         />
         <Drawer.Screen
           name="SignupPage"
-          options={{ drawerLabel: 'Signup Page'}}
+          options={{ drawerLabel: 'Signup Page' }}
           component={signupScreenStack}
         />
         <Drawer.Screen
@@ -353,29 +361,32 @@ function App() {
         />
         <Drawer.Screen
           name="ApiPage"
-          options={{ drawerLabel: 'Api Page'}}
+          options={{ drawerLabel: 'Api Page' }}
           component={apiScreenStack}
         />
         <Drawer.Screen
           name="ApiPage2"
-          options={{ drawerLabel: 'Api Page 2'}}
+          options={{ drawerLabel: 'Api Page 2' }}
           component={apitwoScreenStack}
         />
         <Drawer.Screen
           name="ApiPage3"
-          options={{ drawerLabel: 'Api Page 3'}}
+          options={{ drawerLabel: 'Api Page 3' }}
           component={apthreeScreenStack}
         />
-         <Drawer.Screen
-          name="ButtonPage"
-          options={{ drawerLabel: 'Button Page' }}
-          component={buttonScreenStack}
-        />
+
+        {/* <Drawer.Screen
+          name="CounterUsingRedux"
+          options={{ drawerLabel: 'CounterUsingRedux' }}
+          component={counterScreenStack}
+        /> */}
 
       </Drawer.Navigator>
 
     </NavigationContainer>
+
   );
 }
+
 
 export default App;
