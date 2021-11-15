@@ -1,99 +1,126 @@
 // components/signup.js
+// components/signup.js
 
-import React, { Component, useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert, ActivityIndicator, navigation } from 'react-native';
+
+
+
+
+
+
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TextInput, Button, Alert, ActivityIndicator, navigation, } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import auth from '@react-native-firebase/auth';
+import { useValidation } from 'react-native-form-validator';
+import strings from '../Localization/LocalizedStrings';
+
+const SignUpPage = ({ navigation }) => {
+
+  const [email, setemail] = useState('');
+  const [password, setpassword] = useState('');
+  const [name, setname] = useState('');
+
+  const { validate, isFieldInError, getErrorsInField } =
+    useValidation({
+      state: { name, email, password },
+    });
 
 
+  const _onPressButton = () => {
+    validate({
+      name: { minlength: 3, maxlength: 7, required: true },
+      email: { email: true },
+      password: { minlength: 6, maxlength: 12, required: true },
+
+    });
+  };
 
 
-// const isValidObjField=(obj)=>{
-//   return object.values(obj).every(value=>value.trim())
-// }
-// const updateError=(error,stateUpdater)=>{
-//   stateUpdater(error);
-//   setTimeout(()=>{
-//     stateUpdater('')
-//   },2500)
-// }
-// const isValidEmail=(value)=>{
-//   const rgx=/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-//   return rgx.test(value)
-// }
-const SignupPage = ({ navigation }) => {
+  const handleSubmitPress = () => {
+    if (!email || !password || !name) {
+      Alert.alert('Error', 'Please fill in all fields');
+    } else {
+      auth().createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          console.log('User created');
+          alert('User Created Successfully')
+        }).catch(error => {
+          if (error.code === 'auth/email-already-in-use') {
+            console.log('Email already in use');
+          }
+          if (error.code === 'auth/invalid-email') {
+            console.log('Invalid email');
+          }
+          console.log(error);
+        });
+      setname('');
+      setemail('');
+      setpassword('');
+      navigation.navigate('LoginPage');
+    }
+  }
 
+  function combinedFunction() {
+    _onPressButton();
+    handleSubmitPress();
+  }
 
-  //   const [userInfo,setUserInfo]=useState({
-  //     name:'',
-  //     email:'',
-  //     password:'',
-  //   })
-  //   const [error,setError]=useState('')
-  // const {name,email,password}=userInfo
-  // const handleOnChangeText=(value,fieldname)=>{
-  //   setUserInfo({...userInfo,[fieldname]: value})
-
-  // };
-  // const isValidForm=()=>{
-  //   if(!isValidObjField(userInfo)) return updateError('Required All fields',setError)
-  //   if(!name.trim()|| name.length<3) return updateError('Name Shuld Be 3 Character Long',setError)
-  //   if(!isValidEmail(email)) return updateError('invalid Email',setError)
-  //   if(!password.trim()|| password.length<8) return updateError('Password is less than 8 Character',setError)
-  // }
-  // const submitForm=()=>{
-  //   if(isValidForm()){
-  //     console.log(userInfo)
-  //   }
-  // }
   return (
     <View style={styles.container}>
       {/* {error ? <Text style={{ color: 'red', fontSize: 18, textAlign: 'center' }}>{error}</Text> : null} */}
       <TextInput
         style={styles.inputStyle}
-        // value={name}
-        // onChangeText={(value)=>handleOnChangeText(value,'name')}
-        placeholder="Name"
-      // value={this.state.displayName}
-      // onChangeText={(val) => this.updateInputVal(val, 'displayName')}
-      />
+        value={name}
+        onChangeText={text => setname(text)}
+        placeholder="Name" />
+
+      {isFieldInError('name') &&
+        getErrorsInField('name').map(errorMessage => (
+          <Text key={Math.random().toString()} style={{ color: 'red' }}>{errorMessage}</Text>
+        ))}
+
       <TextInput
         style={styles.inputStyle}
-        // value={email}
-        // onChangeText={(value)=>handleOnChangeText(value,'email')}
-        placeholder="Email"
-      // value={this.state.email}
-      // onChangeText={(val) => this.updateInputVal(val, 'email')}
-      />
+        value={email}
+
+        onChangeText={text => setemail(text)}
+        placeholder="Email" />
+
+      {isFieldInError('email') &&
+        getErrorsInField('email').map(errorMessage => (
+          <Text key={Math.random().toString()} style={{ color: 'red' }}>{errorMessage}</Text>
+        ))}
+
+
       <TextInput
         style={styles.inputStyle}
-        // value={password}
-        // onChangeText={(value)=>handleOnChangeText(value,'password')}
+        value={password}
+        onChangeText={text => setpassword(text)}
         placeholder="Password"
-        // value={this.state.password}
-        // onChangeText={(val) => this.updateInputVal(val, 'password')}
-        maxLength={15}
         secureTextEntry={true}
       />
+      {isFieldInError('password') &&
+        getErrorsInField('password').map(errorMessage => (
+          <Text key={Math.random().toString()} style={{ color: 'red' }}>{errorMessage}</Text>
+        ))}
 
       <Button
-
         color="#3740FE"
-        title="Signup"
-      // onPress={() => this.registerUser()}
-      // onPress={submitForm}
+        title={`${strings.Signup}`}
+        onPress={() => combinedFunction()}
       />
 
 
       <Text
         style={styles.loginText}
         onPress={() => navigation.navigate('LoginPage')}>
-        Already Registered? Click here to Log In
+        {strings.SignUpAccount}
       </Text>
     </View>
   );
 
 }
-export default SignupPage;
+export default SignUpPage;
 
 const styles = StyleSheet.create({
   container: {

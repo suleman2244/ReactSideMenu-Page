@@ -63,6 +63,46 @@ const markers = [
     'title': 'Khaadi Clotehes',
     'description': 'Khaadi, clothes, Karachi, Pakistan'
   },
+  {
+    id: 5,
+
+    coordinate: {
+      latitude: 29.39358672259982,
+      longitude: 71.68874665513466,
+    },
+    'title': 'Khaadi Clotehes',
+    'description': 'Abbtobad, Pakistan'
+  },
+  {
+    id: 6,
+
+    coordinate: {
+      latitude: 31.516011692086565,
+      longitude: 74.29590620905645,
+    },
+    'title': 'Khaadi Clotehes',
+    'description': 'Allama Iqbal Town'
+  },
+  {
+    id: 6,
+
+    coordinate: {
+      latitude: 24.88129901118662,
+      longitude: 67.06649089550847,
+    },
+    'title': 'Khaadi Clotehes',
+    'description': 'Bhadur Yar Jang'
+  },
+  {
+    id: 6,
+
+    coordinate: {
+      latitude: 29.39359607029883,
+      longitude: 71.68866082444758,
+    },
+    'title': 'Khaadi Clotehes',
+    'description': 'Bhawalpur Punjab'
+  },
 ];
 
 const MapApi = () => {

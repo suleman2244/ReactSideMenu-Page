@@ -1,9 +1,11 @@
 
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
+import strings from '../Localization/LocalizedStrings';
 import LoginPage from './LoginPage'
-import SignupPage from './SignupPage'
-
+import SignUpPage from './SignUpPage'
+import SplashPage from './SplashPage';
+//
 
 const authStack = createStackNavigator();
 
@@ -11,7 +13,7 @@ export default function loginScreenStack({ navigation }) {
 
   return (
     <authStack.Navigator
-      initialRouteName="LoginPage"
+      initialRouteName="SplashPage"
       screenOptions={{
         headerShown: true,
         headerStyle: {
@@ -23,21 +25,32 @@ export default function loginScreenStack({ navigation }) {
         },
       }}>
       <authStack.Screen
-        name="LoginPage"
-        component={LoginPage}
+        name="SplashPage"
+        component={SplashPage}
         options={{
-          title: 'Log In Page', //Set Header Title
+          headerShown: false,
+          title: `${strings.Login}`, //Set Header Title
         }}
       />
       <authStack.Screen
-        name="Signup"
-        component={SignupPage}
+        name="LoginPage"
+        component={LoginPage}
         options={{
-          title: 'Sign up', //Set Header Title
+          title: `${strings.Login}`, //Set Header Title
+        }}
+      />
+      <authStack.Screen
+        name="SignUpPage"
+        component={SignUpPage}
+        options={{
+          title: `${strings.Signup}`, //Set Header Title
         }}
       />
 
     </authStack.Navigator>
   );
 }
+
+
+
 

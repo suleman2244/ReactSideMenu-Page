@@ -7,6 +7,7 @@ import {
   Text,
   Linking,
 } from 'react-native';
+import Authuser from './AuthStack/Authuser';
 
 import {
   DrawerContentScrollView,
@@ -16,8 +17,8 @@ import {
 
 const CustomSidebarMenu = (props) => {
   const BASE_PATH =
-    'https://raw.githubusercontent.com/AboutReact/sampleresource/master/';
-  const proileImage = 'react_logo.png';
+    'https://koms.korloy.com/resource/lib/ace-admin/assets/avatars/';
+  const proileImage = 'profile-pic.jpg';
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -26,6 +27,7 @@ const CustomSidebarMenu = (props) => {
         source={{ uri: BASE_PATH + proileImage }}
         style={styles.sideMenuProfileIcon}
       />
+      <Authuser />
       <DrawerContentScrollView {...props}>
         <DrawerItemList {...props} />
 
@@ -43,6 +45,7 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 100 / 2,
     alignSelf: 'center',
+
   },
   iconStyle: {
     width: 15,
